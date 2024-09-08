@@ -7,4 +7,4 @@ Here are some ideas to get you started: -->
 
 - 🔭 I’m currently interning as a full-stack developer.
 - 🌱 I’m currently learning typescript, VueJs, Headless CMS
-- 👯 I’m looking to collaborate on Frontend development
+- 👯 I’m looking to collaborate on Frontend development projects
