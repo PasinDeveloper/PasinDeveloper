@@ -7,7 +7,7 @@
 
 
 <p align="center">
-  <img src="https://readme-typing-svg.herokuapp.com?font=SF+Mono&size=20&duration=3000&color=606060&center=true&width=420&lines=Elegant+Code;Minimal+Design;Human-Centered+Development" />
+  <img src="https://readme-typing-svg.herokuapp.com?font=Orbitron&size=24&duration=3000&color=00E7FF&center=true&vCenter=true&width=520&lines=Full-Stack+Developer;Graphics+Designer;Edge+Tech+Explorer;Digital+Synthwave+Creator" />
 </p>
 
 
@@ -15,9 +15,43 @@
 -----------------
 
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=wave&color=gradient&height=200&section=header&text=Your%20Name&animation=twinkling" />
+  <img src="https://raw.githubusercontent.com/Anmol-Baranwal/Cool-GIFs-For-GitHub/master/gifs/equalizer.gif" width="400"/>
 </p>
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Anmol-Baranwal/Cool-GIFs-For-GitHub/master/gifs/loading-bar.gif" width="300"/>
+</p>
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Anmol-Baranwal/Cool-GIFs-For-GitHub/master/gifs/dna.gif" width="250"/>
+</p>
+
+<p align="center">
+  <img src="https://github.com/<your-username>/<your-username>/blob/output/github-contribution-grid-snake.svg" />
+</p>
+
+<p align="center">
+  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=24&duration=2500&color=F72AF7&center=true&vCenter=true&multiline=true&width=450&lines=Creating+Beautiful+Software;With+Creativity+and+Precision;One+Commit+at+a+Time" />
+</p>
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Anmol-Baranwal/Cool-GIFs-For-GitHub/master/gifs/hologram.gif" width="300"/>
+</p>
+
+## 🎛️ Preferences
+
+🟩 Dark Mode: **Enabled**  
+🟨 Minimal UI: **Enabled**  
+🟦 TypeScript Strict: **Enabled**  
+🟪 Creativity Boost: **Active** 🔮  
+
+<p align="center">
+  <img src="https://media.giphy.com/media/l0HlNpZX8cO2d1Oxy/giphy.gif" width="300"/>
+</p>
+
+<h1 align="center">
+  <img src="https://capsule-render.vercel.app/api?type=transparent&fontColor=00baff&text=FULLSTACK%20DEVELOPER&fontSize=60&animation=scaleIn" />
+</h1>
 
 
 
