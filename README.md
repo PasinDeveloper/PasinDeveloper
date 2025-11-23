@@ -1,6 +1,6 @@
 <!-- TITLE -->
 <h1 align="center">👋 Hey, I'm PasinDeveloper</h1>
-<h2>[IRL - Pasindu Hasanga | පසිඳු හසංග | 帕森度]</h2>
+<h2  align="center">[IRL - Pasindu Hasanga | පසිඳු හසංග | 帕森度]</h2>
 <h3 align="center">Full-Stack Web Developer • Designer • Multidisciplinary Creator</h3>
 
 <!-- Animated Typing Banner -->
