@@ -97,7 +97,7 @@ DevOps:     Git + Vercel + Linux
   <img height="150" src="https://github-readme-stats.vercel.app/api/top-langs/?username=PasinDeveloper&layout=compact&theme=tokyonight" />
 </p>
 
-## 🎨 Custom Aesthetic Badges
+--------
 
 <p align="center">
   <img src="https://img.shields.io/badge/style-clean_%26_minimal-1A1A1A?style=for-the-badge" />
