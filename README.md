@@ -11,6 +11,27 @@
 </p>
 
 
+
+
+-----------------
+
+## 🖥️ Developer Dashboard
+
+| Module | Status | Notes |
+|--------|--------|--------|
+| Frontend Engine | 🔵 Online | Next.js + React stack ready |
+| Backend Core | 🟢 Stable | API routes + Node services running |
+| Design Processor | 🟣 Active | Figma + Tailwind visual systems |
+| Data Stream | 🟢 Synced | SQL → Prisma ORM |
+| Creativity Boost | 🔥 Overclocked | Generating new ideas |
+
+
+-----------------
+
+
+
+
+
 ## 🧬 About Me
 
 I’m a full-stack web developer who enjoys crafting **clean, intuitive, and meaningful digital experiences**. With a background in **graphic design** and **data operations**, I approach projects with a balance of creativity, structure, clarity, and precision — building software that feels human-centered and thoughtfully engineered.
