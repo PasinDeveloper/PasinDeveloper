@@ -7,7 +7,7 @@
 
 
 <p align="center">
-  <img src="https://readme-components.vercel.app/api?component=orbit&text=Next.js,React,TypeScript,TailwindCSS,Node.js" />
+  <img src="https://readme-typing-svg.herokuapp.com?font=SF+Mono&size=20&duration=3000&color=606060&center=true&width=420&lines=Elegant+Code;Minimal+Design;Human-Centered+Development" />
 </p>
 
 
