@@ -4,36 +4,11 @@
 <h3 align="center">Full-Stack Web Developer • Designer • Multidisciplinary Creator</h3>
 
 <!-- Animated Typing Banner -->
-<p align="center">
-  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=500&size=22&duration=3500&pause=1200&color=4A9CF7&center=true&vCenter=true&width=500&lines=Full-Stack+Web+Developer;Creative+UI%2FUX+Designer;Detail-Oriented+Data+Handler;Clean+Code+%26+Clean+Design+Enthusiast" />
-</p>
 
----
-
-<h1 align="center">🌌 <span style="color:#00eaff">Cyberpunk Developer</span> — <Your Name></h1>
-<h3 align="center" style="color:#ff00ff">Full-Stack Web Developer • Designer • Digital Architect</h3>
 
 <p align="center">
   <img src="https://readme-typing-svg.herokuapp.com?font=Orbitron&size=24&duration=3000&color=00E7FF&center=true&vCenter=true&width=520&lines=Full-Stack+Developer;UI%2FUX+Designer;Edge+Tech+Explorer;Digital+Synthwave+Creator" />
 </p>
-
----
-
-## ⚡ Neon Stack
-<p align="center">
-  <img src="https://skillicons.dev/icons?i=next,react,ts,tailwind,nodejs,express,postgres,figma,git,yarn&theme=light" />
-</p>
-
----
-
-## 💾 System File: Developer Profile
-```bash
-> role: "Full-Stack Developer"
-> mode: "Neon Overdrive"
-> languages: ["TypeScript", "English", "Chinese", "Sinhalese"]
-> design: "Neon Interfaces & Vaporwave Layouts"
-> motto: "Build fast. Glow bright."
-
 
 
 ## 🧬 About Me
