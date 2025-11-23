@@ -1,5 +1,5 @@
 <!-- TITLE -->
-<h1 align="center">👋 Hey, I'm PasinDeveloper - [IRL Pasindu Hasanga]</h1>
+<h1 align="center">👋 Hey, I'm PasinDeveloper - [IRL - Pasindu Hasanga | පසිඳු හසංග | 帕森度]</h1>
 <h3 align="center">Full-Stack Web Developer • Designer • Multidisciplinary Creator</h3>
 
 <!-- Animated Typing Banner -->
@@ -17,7 +17,7 @@ I’m a full-stack web developer who enjoys crafting **clean, intuitive, and mea
 
 ## 🎓 Education
 
-I completed my undergraduate degree at **<some-university> in China**, an international environment that expanded my technical perspective and strengthened my ability to collaborate across cultures, disciplines, and languages.
+I completed my undergraduate degree in **China**, an international environment that expanded my technical perspective and strengthened my ability to collaborate across cultures, disciplines, and languages.
 
 ---
 
@@ -35,7 +35,7 @@ I completed my undergraduate degree at **<some-university> in China**, an intern
 ## 🛠️ Tech Stack (Visual Grid)
 
 <p align="center">
-  <img src="https://skillicons.dev/icons?i=next,react,ts,tailwind,nodejs,express,prisma,postgres,figma,git,yarn&theme=dark" />
+  <img src="https://skillicons.dev/icons?i=next,react,ts,nestjs,wordpress,tailwind,nodejs,express,prisma,postgres,figma,git,yarn&theme=dark" />
 </p>
 
 ---
@@ -86,11 +86,22 @@ DevOps:     Git + Vercel + Linux
 
 ## 📈 GitHub Activity & Stats
 
-<p align="center"> <img height="160" src="https://github-readme-stats.vercel.app/api?username=PasinDeveloper&show_icons=true&theme=tokyonight" /> <img height="160" src="https://github-readme-streak-stats.herokuapp.com?user=PasinDeveloper&theme=tokyonight" /> </p> <p align="center"> <img height="150" src="https://github-readme-stats.vercel.app/api/top-langs/?username=PasinDeveloper&layout=compact&theme=tokyonight" /> </p>
+<p align="center">
+  <img height="160" src="https://github-readme-stats.vercel.app/api?username=PasinDeveloper&show_icons=true&theme=tokyonight" />
+  <img height="160" src="https://github-readme-streak-stats.herokuapp.com?user=PasinDeveloper&theme=tokyonight" />
+</p>
+
+<p align="center">
+  <img height="150" src="https://github-readme-stats.vercel.app/api/top-langs/?username=PasinDeveloper&layout=compact&theme=tokyonight" />
+</p>
 
 ## 🎨 Custom Aesthetic Badges
 
-<p align="center"> <img src="https://img.shields.io/badge/style-clean_%26_minimal-1A1A1A?style=for-the-badge" /> <img src="https://img.shields.io/badge/design-user_first-0055FF?style=for-the-badge" /> <img src="https://img.shields.io/badge/coding-typesafe-00A8E8?style=for-the-badge" /> </p>
+<p align="center">
+  <img src="https://img.shields.io/badge/style-clean_%26_minimal-1A1A1A?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/design-user_first-0055FF?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/coding-typesafe-00A8E8?style=for-the-badge" />
+</p>
 
 ## 🤝 Connect With Me
 
