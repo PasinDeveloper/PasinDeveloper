@@ -15,15 +15,10 @@
 
 -----------------
 
-## 🖥️ Developer Dashboard
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=rect&text=FULLSTACK%20DEVELOPER&fontAlign=50&animation=fadeIn&color=0:000000,100:0af" />
+</p>
 
-| Module | Status | Notes |
-|--------|--------|--------|
-| Frontend Engine | 🔵 Online | Next.js + React stack ready |
-| Backend Core | 🟢 Stable | API routes + Node services running |
-| Design Processor | 🟣 Active | Figma + Tailwind visual systems |
-| Data Stream | 🟢 Synced | SQL → Prisma ORM |
-| Creativity Boost | 🔥 Overclocked | Generating new ideas |
 
 
 -----------------
