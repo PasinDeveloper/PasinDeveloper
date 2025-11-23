@@ -1,5 +1,5 @@
 <!-- HEADER -->
-<h1 align="center">✨ Hi, I'm <Your Name> ✨</h1>
+<h1 align="center">✨ Hi, I'm PasinDeveloper - IRL Pasindu Hasanga ✨</h1>
 <h3 align="center">Full-Stack Web Developer • Designer • Multidisciplinary Creator</h3>
 
 <p align="center">
@@ -77,12 +77,12 @@ I completed my undergraduate degree at **<some-university> in China**, where I s
 ## 📈 GitHub Activity & Visual Stats
 
 <p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=<your-github-username>&show_icons=true&theme=tokyonight" height="160" />
-  <img src="https://github-readme-streak-stats.herokuapp.com?user=<your-github-username>&theme=tokyonight" height="160" />
+  <img src="https://github-readme-stats.vercel.app/api?username=PasinDeveloper&show_icons=true&theme=tokyonight" height="160" />
+  <img src="https://github-readme-streak-stats.herokuapp.com?user=PasinDeveloper&theme=tokyonight" height="160" />
 </p>
 
 <p align="center">
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=<your-github-username>&layout=compact&theme=tokyonight" height="150" />
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=PasinDeveloper&layout=compact&theme=tokyonight" height="150" />
 </p>
 
 ---
@@ -111,5 +111,5 @@ I completed my undergraduate degree at **<some-university> in China**, where I s
 ## 🎉 Thanks for Visiting!
 
 <p align="center">
-  <img src="https://komarev.com/ghpvc/?username=<your-github-username>&style=plastic&color=brightgreen" />
+  <img src="https://komarev.com/ghpvc/?username=PasinDeveloper&style=plastic&color=brightgreen" />
 </p>
