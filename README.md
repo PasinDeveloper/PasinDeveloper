@@ -7,9 +7,8 @@
 
 
 <p align="center">
-  <img src="https://readme-typing-svg.herokuapp.com?font=Orbitron&size=24&duration=3000&color=00E7FF&center=true&vCenter=true&width=520&lines=Full-Stack+Developer;Designer;Edge+Tech+Explorer;Digital+Synthwave+Creator" />
+  <img src="https://readme-components.vercel.app/api?component=orbit&text=Next.js,React,TypeScript,TailwindCSS,Node.js" />
 </p>
-
 
 
 
