@@ -16,8 +16,9 @@
 -----------------
 
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=rect&text=FULLSTACK%20DEVELOPER&fontAlign=50&animation=fadeIn&color=0:000000,100:0af" />
+  <img src="https://capsule-render.vercel.app/api?type=wave&color=gradient&height=200&section=header&text=Your%20Name&animation=twinkling" />
 </p>
+
 
 
 
