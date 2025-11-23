@@ -36,7 +36,7 @@ I completed my undergraduate degree in **China**, an international environment t
 ## 🛠️ Tech Stack (Visual Grid)
 
 <p align="center">
-  <img src="https://skillicons.dev/icons?i=next,react,ts,nestjs,wordpress,tailwind,nodejs,express,postgres,prisma,php,appwrite,threejs,n8n,mysql,mongodb,figma,git,yarn,bun,pnpm&theme=dark" />
+  <img src="https://skillicons.dev/icons?i=next,react,ts,nestjs,wordpress,tailwind,nodejs,express,postgres,prisma,php,appwrite,threejs,mysql,mongodb,figma,git,yarn,bun,pnpm&theme=dark" />
 </p>
 
 ---
