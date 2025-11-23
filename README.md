@@ -10,36 +10,6 @@
   <img src="https://readme-typing-svg.herokuapp.com?font=Orbitron&size=24&duration=3000&color=00E7FF&center=true&vCenter=true&width=520&lines=Full-Stack+Developer;Graphics+Designer;Edge+Tech+Explorer;Digital+Synthwave+Creator" />
 </p>
 
-------------
-
-<p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&height=80&text=Fullstack%20Developer&fontAlign=50&section=header"/>
-</p>
-
-<img src="https://github-readme-stats.vercel.app/api?username=YourUsername&show_icons=true&theme=radical">
-
-<img src="https://github-readme-streak-stats.herokuapp.com?user=YourUsername&theme=radical">
-
-<p align="center">
-  <img src="https://skillicons.dev/icons?i=next,react,ts,tailwind,nodejs,postgres,figma,git,yarn">
-</p>
-
-<img src="https://img.shields.io/badge/Next.js-000?style=for-the-badge&logo=nextdotjs">
-<img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react">
-
-<div style="border:1px solid #ccc;border-radius:8px;padding:1rem;">
-  <div style="display:flex;gap:6px;padding-bottom:8px;">
-    🔴 🟡 🟢
-  </div>
-  <pre>
-  const dev = "Fullstack Developer";
-  </pre>
-</div>
-
-
-
--------------
-
 
 ## 🧬 About Me
 
