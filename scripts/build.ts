@@ -495,11 +495,19 @@ function archCard(name: ThemeName): string {
 }
 
 /** A button drawn inside the Connect card: cinnabar seal square, label, arrow. */
-function button(t: Tokens, x: number, y: number, w: number, label: string): string {
+/** LinkedIn mark: Tabler Icons (MIT), filled badge. Simple Icons no longer carries LinkedIn. */
+const LINKEDIN = readFileSync(new URL("../icons/linkedin.path", import.meta.url), "utf8").trim();
+
+/** A button inside the Connect card: white logo on a cinnabar tile, label, arrow. */
+function button(t: Tokens, x: number, y: number, w: number, label: string, icon: "pa" | "in"): string {
+  const logo =
+    icon === "pa"
+      ? `<image href="${ART[0]}" x="${x + 11}" y="${y + 9}" width="30" height="30" filter="url(#tintw)"/>`
+      : `<path transform="translate(${x + 14} ${y + 12}) scale(1)" d="${LINKEDIN}" fill="#ffffff"/>`;
   return `<g class="rise" style="animation-delay:.3s"><rect x="${x}" y="${y}" width="${w}" height="48" rx="6" fill="${t.paper}" fill-opacity=".6" stroke="${t.text}" stroke-opacity="${t.line + 0.2}"/>
-  <rect x="${x + 14}" y="${y + 14}" width="20" height="20" rx="2.5" fill="${t.accent}"/>
-  ${type("serifBold", label, x + 50, y + 31, 23, { fill: t.text })}
-  ${arrow(x + 50 + measure("serifBold", label, 23) + 12, y + 17, 12, t.text)}</g>`;
+  <rect x="${x + 8}" y="${y + 8}" width="34" height="32" rx="5" fill="${t.accent}"/>${logo}
+  ${type("serifBold", label, x + 56, y + 31, 23, { fill: t.text })}
+  ${arrow(x + 56 + measure("serifBold", label, 23) + 12, y + 17, 12, t.text)}</g>`;
 }
 
 /**
@@ -508,7 +516,7 @@ function button(t: Tokens, x: number, y: number, w: number, label: string): stri
  */
 function connectCard(name: ThemeName, half: 0 | 1): string {
   const t = TOKENS[name];
-  const body = `<g class="rise">${heading("Connect", 48, 52, t)}</g>${button(t, 252, 84, 190, "Portfolio")}${button(t, 458, 84, 190, "LinkedIn")}`;
+  const body = `<g class="rise">${heading("Connect", 48, 52, t)}</g><filter id="tintw" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 1 0"/></filter>${button(t, 246, 84, 196, "Portfolio", "pa")}${button(t, 458, 84, 196, "LinkedIn", "in")}`;
   const full = frame(900, 160, t, "cn", body, RISE);
   return full.replace(/width="900" height="160" viewBox="0 0 900 160"/, `width="450" height="160" viewBox="${half * 450} 0 450 160"`);
 }

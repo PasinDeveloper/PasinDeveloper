@@ -65,7 +65,7 @@
 
 <p align="center"><sub>
 Logos are trademarks of their respective owners, shown only to say which technologies I use, and recoloured to match this page.<br>
-Icons from <a href="https://simpleicons.org">Simple Icons</a> (CC0).
+Icons from <a href="https://simpleicons.org">Simple Icons</a> (CC0); LinkedIn mark from <a href="https://tabler.io/icons">Tabler Icons</a> (MIT).
 PHP logo: <a href="https://php.net/download-logos.php">php.net</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>, recoloured; this adaptation is shared under the same licence.
 Git logo by Jason Long, <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>, recoloured.
 Yarn logo: <a href="https://github.com/yarnpkg/assets">yarnpkg/assets</a>, <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, recoloured.
