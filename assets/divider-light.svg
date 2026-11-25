@@ -1,0 +1,3 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="28" viewBox="0 0 900 28" role="img"><style>.b{animation:d 2s ease both}@keyframes d{from{stroke-dasharray:1;stroke-dashoffset:1}to{stroke-dasharray:1;stroke-dashoffset:0}}@media (prefers-reduced-motion: reduce){.b{animation:none;stroke-dashoffset:0}}</style>
+<path class="b" d="M20 14 C 200 6, 360 20, 450 13 S 700 8, 880 14" fill="none" stroke="#1f1b16" stroke-opacity=".45" stroke-width="1.6" stroke-linecap="round" pathLength="1"/>
+<rect x="436" y="5" width="18" height="18" rx="2.5" fill="#a3141c"/></svg>
