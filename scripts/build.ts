@@ -35,7 +35,7 @@ const num = (n: number | null) => (n === null || n === undefined ? "—" : n.toL
  *   mono               Tomorrow       small labels, tags, percentages
  *   display            Jura           tagline
  * Glyph data is exported once by tools/export-glyphs.py, so the daily workflow needs no font tooling. */
-type FontKey = "serif" | "serifBold" | "brush" | "mono" | "display";
+type FontKey = "serif" | "serifBold" | "brush" | "mono" | "monoReg" | "monoBold" | "display" | "displayBold";
 interface Glyph { d: string; adv: number }
 interface FontData { upm: number; asc: number; glyphs: Record<string, Glyph> }
 const FONTS: Record<FontKey, FontData> = JSON.parse(readFileSync(new URL("../fonts/glyphs.json", import.meta.url), "utf8"));
@@ -213,7 +213,7 @@ function statsCard(name: ThemeName): string {
     ${type("mono", `LAST 12 MONTHS · ${stats.updated ? stats.updated : "AWAITING FIRST SYNC"}`, 852, 205, 11, { fill: t.text, opacity: t.muted, ls: 2, anchor: "end" })}
   </g>`;
   const css = `.rise{animation:rise .8s ease both}@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}`;
-  return frame(900, 250, t, "st", body, css);
+  return frame(900, 284, t, "st", `<g class="rise">${heading("Activity", 48, 52, t)}</g><g transform="translate(0 30)">${body}</g>`, css);
 }
 
 function langsCard(name: ThemeName): string {
@@ -290,24 +290,28 @@ function contribCard(name: ThemeName): string {
   return frame(w, y0 + 7 * step + 46, t, "cb", body, css);
 }
 
+/** Brand marks from Simple Icons (CC0 files; the logos remain trademarks of their owners). One path each, 24x24. */
+const ICONS: Record<string, string> = JSON.parse(readFileSync(new URL("../icons/icons.json", import.meta.url), "utf8"));
+
 function stackCard(name: ThemeName): string {
   const t = TOKENS[name];
-  let y = 112;
+  const tileW = 100, tileH = 86, gapX = 10, pitch = 98, y0 = 96, x0 = 190;
   let i = 0;
-  const rows = STACK.map((g) => {
-    const pills: string[] = [];
-    let x = 190;
-    for (const item of g.items) {
-      const w = Math.ceil(measure("mono", item, 13, 0.4)) + 28;
-      pills.push(`<g class="rise" style="animation-delay:${(i++ * 0.05).toFixed(2)}s"><rect x="${x}" y="${y - 19}" width="${w}" height="28" rx="4" fill="none" stroke="${t.text}" stroke-opacity="${t.line + 0.1}"/>${type("mono", item, x + w / 2, y, 13, { fill: t.text, anchor: "middle", ls: 0.4 })}</g>`);
-      x += w + 10;
-    }
-    const row = `${type("mono", g.group.toUpperCase(), 48, y, 11.5, { fill: t.text, opacity: t.muted, ls: 2.5 })}${pills.join("")}`;
-    y += 46;
-    return row;
+  const rows = STACK.map((g, r) => {
+    const top = y0 + r * pitch;
+    const tiles = g.items.map((item, c) => {
+      const x = x0 + c * (tileW + gapX);
+      const d = ICONS[item];
+      if (!d) console.warn(`no icon for ${item}`);
+      const k = 1.45;
+      const ix = x + tileW / 2 - 12 * k, iy = top + 14;
+      return `<g class="rise" style="animation-delay:${(i++ * 0.04).toFixed(2)}s"><rect x="${x}" y="${top}" width="${tileW}" height="${tileH}" rx="8" fill="${t.text}" fill-opacity="${name === "dark" ? 0.04 : 0.05}" stroke="${t.text}" stroke-opacity="${t.line + 0.1}"/>${d ? `<path transform="translate(${r2(ix)} ${iy}) scale(${k})" d="${d}" fill="${t.text}"/>` : ""}${type("mono", item, x + tileW / 2, top + 72, 11, { fill: t.text, opacity: t.muted + 0.1, anchor: "middle", ls: 0.3 })}</g>`;
+    }).join("");
+    const label = type("mono", g.group.toUpperCase(), 48, top + tileH / 2 + 4, 11.5, { fill: t.text, opacity: t.muted, ls: 2.5 });
+    return label + tiles;
   });
-  const css = `.rise{animation:rise .7s ease both}@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}`;
-  return frame(900, y - 24, t, "sk", `<g class="rise">${heading("Tech Stack", 48, 52, t)}</g>\n` + rows.join("\n"), css);
+  const h = y0 + STACK.length * pitch + 20;
+  return frame(900, h, t, "sk", `<g class="rise">${heading("Tech Stack", 48, 52, t)}</g>\n` + rows.join("\n"), RISE);
 }
 
 function divider(name: ThemeName): string {
@@ -318,22 +322,21 @@ function divider(name: ThemeName): string {
 `;
 }
 
-function pill(name: ThemeName, label: string, w: number): string {
-  const t = TOKENS[name];
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="48" viewBox="0 0 ${w} 48" role="img">
-<rect x="1" y="1" width="${w - 2}" height="46" rx="6" fill="${t.paper}" stroke="${t.text}" stroke-opacity="${t.line + 0.2}"/>
-<rect x="14" y="14" width="20" height="20" rx="2.5" fill="${t.accent}"/>
-${type("serifBold", label, 50, 31, 23, { fill: t.text })}
-${arrow(50 + measure("serifBold", label, 23) + 12, 17, 12, t.text)}</svg>
-`;
-}
 
 
 /* ---------- Text cards: About, Education, DNA, Exploring, Code, Architecture ---------- */
 type Run = { t: string; b?: boolean };
 
+/** Reading text on the cards. Switch with STYLE=serif|tech when building. */
+const STYLE = process.env.STYLE ?? "tech";
+const HEAD_FONT = (process.env.HEAD ?? "monoBold") as FontKey;
+const BODY =
+  STYLE === "tech"
+    ? { reg: "monoReg" as FontKey, bold: "monoBold" as FontKey, size: 16, lh: 28, gap: 11, opacity: 0.95, head: HEAD_FONT, headSize: 28 }
+    : { reg: "serif" as FontKey, bold: "serifBold" as FontKey, size: 20, lh: 30, gap: 10, opacity: 1, head: "serifBold" as FontKey, headSize: 28 };
+
 /** Word-wraps rich text into outlined lines. Returns the SVG and the height used. */
-function paragraph(runs: Run[], x: number, y: number, maxW: number, size: number, lh: number, t: Tokens, opacity = 0.88) {
+function paragraph(runs: Run[], x: number, y: number, maxW: number, size: number, lh: number, t: Tokens, opacity = BODY.opacity) {
   // Words carry a `glue` flag when no space separates them from the previous word (e.g. bold "China" then ", an").
   const words: { w: string; b: boolean; glue: boolean }[] = [];
   let prevEndsSpace = true;
@@ -347,8 +350,8 @@ function paragraph(runs: Run[], x: number, y: number, maxW: number, size: number
     });
     prevEndsSpace = /\s$/.test(r.t);
   }
-  const fontOf = (b: boolean): FontKey => (b ? "serifBold" : "serif");
-  const space = measure("serif", " ", size);
+  const fontOf = (b: boolean): FontKey => (b ? BODY.bold : BODY.reg);
+  const space = measure(BODY.reg, " ", size);
   const lines: { w: string; b: boolean; glue: boolean }[][] = [[]];
   let lw = 0;
   for (const word of words) {
@@ -372,7 +375,7 @@ function paragraph(runs: Run[], x: number, y: number, maxW: number, size: number
 
 /** Section title with the short cinnabar rule used on the other cards. */
 function heading(label: string, x: number, y: number, t: Tokens): string {
-  return `${type("serifBold", label, x, y, 28, { fill: t.text })}<rect x="${x}" y="${y + 12}" width="26" height="3" rx="1.5" fill="${t.accent}"/>`;
+  return `${type(BODY.head, label, x, y, BODY.headSize, { fill: t.text, ls: BODY.head === "serifBold" ? 0 : 0.6 })}<rect x="${x}" y="${y + 12}" width="26" height="3" rx="1.5" fill="${t.accent}"/>`;
 }
 
 const RISE = `.rise{animation:rise .8s ease both}@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}`;
@@ -402,9 +405,9 @@ export const EXPLORING = [
 function aboutCard(name: ThemeName): string {
   const t = TOKENS[name];
   const colW = 380;
-  const a = paragraph(ABOUT, 48, 92, colW, 18, 27, t);
-  const e = paragraph(EDUCATION, 472, 92, colW, 18, 27, t);
-  const h = 92 + Math.max(a.height, e.height) + 30;
+  const a = paragraph(ABOUT, 48, 94, colW, BODY.size, BODY.lh, t);
+  const e = paragraph(EDUCATION, 472, 94, colW, BODY.size, BODY.lh, t);
+  const h = 94 + Math.max(a.height, e.height) + 30;
   const body = rise(0, `${heading("About Me", 48, 52, t)}\n  ${a.svg}`) + rise(1, `${heading("Education", 472, 52, t)}\n  ${e.svg}`) +
     `<line x1="450" y1="36" x2="450" y2="${h - 28}" stroke="${t.text}" stroke-opacity="${t.line}" stroke-dasharray="2 6" stroke-linecap="round"/>`;
   return frame(900, h, t, "ab", body, RISE);
@@ -414,9 +417,9 @@ function listBlock(items: string[], x: number, y: number, maxW: number, t: Token
   let cy = y;
   const parts: string[] = [];
   for (const item of items) {
-    const p = paragraph([{ t: item }], x + 22, cy, maxW - 22, 18, 26, t, 0.9);
+    const p = paragraph([{ t: item }], x + 22, cy, maxW - 22, BODY.size, BODY.lh, t);
     parts.push(`<rect x="${x + 2}" y="${cy - 10}" width="8" height="8" rx="1.5" fill="${t.accent}"/>${p.svg}`);
-    cy += p.height + 9;
+    cy += p.height + BODY.gap;
   }
   return { svg: rise(delay, parts.join("\n  ")), height: cy - y };
 }
@@ -475,7 +478,7 @@ function archCard(name: ThemeName): string {
   const t = TOKENS[name];
   const rows = ARCH_ROWS.map(([k, v], i) => {
     const y = 108 + i * 44;
-    return `${type("mono", k.toUpperCase(), 48, y, 11.5, { fill: t.text, opacity: t.muted, ls: 2.5 })}${type("serif", v, 160, y + 1, 19, { fill: t.text, opacity: 0.92 })}<line x1="48" y1="${y + 14}" x2="420" y2="${y + 14}" stroke="${t.text}" stroke-opacity="${t.line * 0.5}" stroke-dasharray="2 6" stroke-linecap="round"/>`;
+    return `${type("mono", k.toUpperCase(), 48, y, 11.5, { fill: t.text, opacity: t.muted, ls: 2.5 })}${type(BODY.reg, v, 170, y + 1, BODY.size + 1, { fill: t.text, opacity: BODY.opacity })}<line x1="48" y1="${y + 14}" x2="420" y2="${y + 14}" stroke="${t.text}" stroke-opacity="${t.line * 0.5}" stroke-dasharray="2 6" stroke-linecap="round"/>`;
   }).join("\n  ");
   const boxW = 330, bx = 520, bh = 34, gap = 24;
   const flow = ARCH_FLOW.map((label, i) => {
@@ -491,9 +494,23 @@ function archCard(name: ThemeName): string {
   return frame(900, h, t, "ar", body, RISE);
 }
 
-function titleStrip(name: ThemeName, label: string): string {
+/** A button drawn inside the Connect card: cinnabar seal square, label, arrow. */
+function button(t: Tokens, x: number, y: number, w: number, label: string): string {
+  return `<g class="rise" style="animation-delay:.3s"><rect x="${x}" y="${y}" width="${w}" height="48" rx="6" fill="${t.paper}" fill-opacity=".6" stroke="${t.text}" stroke-opacity="${t.line + 0.2}"/>
+  <rect x="${x + 14}" y="${y + 14}" width="20" height="20" rx="2.5" fill="${t.accent}"/>
+  ${type("serifBold", label, x + 50, y + 31, 23, { fill: t.text })}
+  ${arrow(x + 50 + measure("serifBold", label, 23) + 12, y + 17, 12, t.text)}</g>`;
+}
+
+/**
+ * One card, cut into a left and right half so each half can carry its own link.
+ * Both halves draw the same 900px card; the viewBox picks the half, so the seam is invisible.
+ */
+function connectCard(name: ThemeName, half: 0 | 1): string {
   const t = TOKENS[name];
-  return frame(900, 78, t, "ti", `<g class="rise">${heading(label, 48, 50, t)}</g>`, RISE);
+  const body = `<g class="rise">${heading("Connect", 48, 52, t)}</g>${button(t, 252, 84, 190, "Portfolio")}${button(t, 458, 84, 190, "LinkedIn")}`;
+  const full = frame(900, 160, t, "cn", body, RISE);
+  return full.replace(/width="900" height="160" viewBox="0 0 900 160"/, `width="450" height="160" viewBox="${half * 450} 0 450 160"`);
 }
 
 const write = (f: string, s: string) => writeFileSync(new URL(f, out), s);
@@ -503,14 +520,12 @@ for (const n of ["dark", "light"] as ThemeName[]) {
   write(`langs-${n}.svg`, langsCard(n));
   write(`contrib-${n}.svg`, contribCard(n));
   write(`stack-${n}.svg`, stackCard(n));
-  write(`title-activity-${n}.svg`, titleStrip(n, "Activity"));
-  write(`title-connect-${n}.svg`, titleStrip(n, "Connect"));
+  write(`connect-left-${n}.svg`, connectCard(n, 0));
+  write(`connect-right-${n}.svg`, connectCard(n, 1));
   write(`about-${n}.svg`, aboutCard(n));
   write(`dna-${n}.svg`, dnaCard(n));
   write(`code-${n}.svg`, codeCard(n));
   write(`arch-${n}.svg`, archCard(n));
   write(`divider-${n}.svg`, divider(n));
-  write(`link-portfolio-${n}.svg`, pill(n, "Portfolio", 190));
-  write(`link-linkedin-${n}.svg`, pill(n, "LinkedIn", 190));
 }
 console.log("assets written");

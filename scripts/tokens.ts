@@ -48,7 +48,7 @@ export const PROFILE = {
 } as const;
 
 export const STACK: { group: string; items: string[] }[] = [
-  { group: "Front end", items: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Motion", "Three.js"] },
+  { group: "Front end", items: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Three.js"] },
   { group: "Back end", items: ["NestJS", "Node.js", "Express", "Laravel", "PHP"] },
   { group: "Data", items: ["PostgreSQL", "Prisma", "MongoDB", "MySQL", "Appwrite"] },
   { group: "Craft", items: ["Figma", "Git", "Yarn", "pnpm", "Bun", "WordPress"] },

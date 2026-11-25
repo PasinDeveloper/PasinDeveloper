@@ -23,11 +23,15 @@ def export(font, chars):
     return {"upm": font["head"].unitsPerEm, "asc": font["hhea"].ascent, "glyphs": out}
 
 jura = instancer.instantiateVariableFont(TTFont("fonts/Jura[wght].ttf"), {"wght": 600})
+jura7 = instancer.instantiateVariableFont(TTFont("fonts/Jura[wght].ttf"), {"wght": 700})
 fonts = {
     "serif": export(TTFont("fonts/AbhayaLibre-Regular.ttf"), ASCII + EXTRA),
     "serifBold": export(TTFont("fonts/AbhayaLibre-SemiBold.ttf"), ASCII + EXTRA),
     "mono": export(TTFont("fonts/Tomorrow-Medium.ttf"), ASCII + EXTRA),
+    "monoReg": export(TTFont("fonts/Tomorrow-Regular.ttf"), ASCII + EXTRA),
+    "monoBold": export(TTFont("fonts/Tomorrow-Bold.ttf"), ASCII + EXTRA),
     "display": export(jura, ASCII + EXTRA),
+    "displayBold": export(jura7, ASCII + EXTRA),
     "brush": export(TTFont("fonts/MaShanZheng-Regular.ttf"), CJK),
 }
 for k, v in fonts.items():
