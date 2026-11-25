@@ -292,7 +292,7 @@ function contribCard(name: ThemeName): string {
 
 function stackCard(name: ThemeName): string {
   const t = TOKENS[name];
-  let y = 54;
+  let y = 112;
   let i = 0;
   const rows = STACK.map((g) => {
     const pills: string[] = [];
@@ -307,7 +307,7 @@ function stackCard(name: ThemeName): string {
     return row;
   });
   const css = `.rise{animation:rise .7s ease both}@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}`;
-  return frame(900, y + 6, t, "sk", rows.join("\n"), css);
+  return frame(900, y - 24, t, "sk", `<g class="rise">${heading("Tech Stack", 48, 52, t)}</g>\n` + rows.join("\n"), css);
 }
 
 function divider(name: ThemeName): string {
@@ -328,6 +328,174 @@ ${arrow(50 + measure("serifBold", label, 23) + 12, 17, 12, t.text)}</svg>
 `;
 }
 
+
+/* ---------- Text cards: About, Education, DNA, Exploring, Code, Architecture ---------- */
+type Run = { t: string; b?: boolean };
+
+/** Word-wraps rich text into outlined lines. Returns the SVG and the height used. */
+function paragraph(runs: Run[], x: number, y: number, maxW: number, size: number, lh: number, t: Tokens, opacity = 0.88) {
+  // Words carry a `glue` flag when no space separates them from the previous word (e.g. bold "China" then ", an").
+  const words: { w: string; b: boolean; glue: boolean }[] = [];
+  let prevEndsSpace = true;
+  for (const r of runs) {
+    const toks = r.t.split(/(\s+)/).filter((x) => x !== "");
+    let sawSpace = /^\s/.test(r.t);
+    toks.forEach((tok, i) => {
+      if (/^\s+$/.test(tok)) { sawSpace = true; return; }
+      words.push({ w: tok, b: !!r.b, glue: i === 0 && !sawSpace && !prevEndsSpace && words.length > 0 });
+      sawSpace = false;
+    });
+    prevEndsSpace = /\s$/.test(r.t);
+  }
+  const fontOf = (b: boolean): FontKey => (b ? "serifBold" : "serif");
+  const space = measure("serif", " ", size);
+  const lines: { w: string; b: boolean; glue: boolean }[][] = [[]];
+  let lw = 0;
+  for (const word of words) {
+    const ww = measure(fontOf(word.b), word.w, size);
+    const gap = lines[lines.length - 1].length && !word.glue ? space : 0;
+    if (lines[lines.length - 1].length && !word.glue && lw + gap + ww > maxW) { lines.push([]); lw = 0; }
+    lw += (lines[lines.length - 1].length && !word.glue ? space : 0) + ww;
+    lines[lines.length - 1].push(word);
+  }
+  const out = lines.map((line, i) => {
+    let cx = x;
+    return line.map((word, j) => {
+      if (j > 0 && !word.glue) cx += space;
+      const piece = type(fontOf(word.b), word.w, cx, y + i * lh, size, { fill: t.text, opacity });
+      cx += measure(fontOf(word.b), word.w, size);
+      return piece;
+    }).join("");
+  }).join("\n  ");
+  return { svg: out, height: lines.length * lh };
+}
+
+/** Section title with the short cinnabar rule used on the other cards. */
+function heading(label: string, x: number, y: number, t: Tokens): string {
+  return `${type("serifBold", label, x, y, 28, { fill: t.text })}<rect x="${x}" y="${y + 12}" width="26" height="3" rx="1.5" fill="${t.accent}"/>`;
+}
+
+const RISE = `.rise{animation:rise .8s ease both}@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}`;
+const rise = (i: number, inner: string) => `<g class="rise" style="animation-delay:${(i * 0.18).toFixed(2)}s">${inner}</g>`;
+
+export const ABOUT: Run[] = [
+  { t: "I'm a full-stack web developer who enjoys crafting " },
+  { t: "clean, intuitive, and meaningful digital experiences", b: true },
+  { t: ". With a background in " }, { t: "graphic design", b: true }, { t: " and " }, { t: "data operations", b: true },
+  { t: ", I approach projects with a balance of creativity, structure, clarity, and precision — building software that feels human-centered and thoughtfully engineered." },
+];
+export const EDUCATION: Run[] = [
+  { t: "I completed my undergraduate degree in " }, { t: "China", b: true },
+  { t: ", an international environment that expanded my technical perspective and strengthened my ability to collaborate across cultures, disciplines, and languages." },
+];
+export const DNA = [
+  "Full-Stack Thinker", "Design-Conscious Coder", "Accuracy-Driven Data Professional",
+  "Multilingual Communicator", "Problem Solver with Creative Insight", "Values Clean UI, Clean Code, Clean Architecture",
+];
+export const EXPLORING = [
+  "Deepening my full-stack flow with Next.js Server Actions",
+  "Building my own TypeScript utility library",
+  "Exploring UI animation practices with Motion",
+  "Expanding my skills in design systems and component architecture",
+];
+
+function aboutCard(name: ThemeName): string {
+  const t = TOKENS[name];
+  const colW = 380;
+  const a = paragraph(ABOUT, 48, 92, colW, 18, 27, t);
+  const e = paragraph(EDUCATION, 472, 92, colW, 18, 27, t);
+  const h = 92 + Math.max(a.height, e.height) + 30;
+  const body = rise(0, `${heading("About Me", 48, 52, t)}\n  ${a.svg}`) + rise(1, `${heading("Education", 472, 52, t)}\n  ${e.svg}`) +
+    `<line x1="450" y1="36" x2="450" y2="${h - 28}" stroke="${t.text}" stroke-opacity="${t.line}" stroke-dasharray="2 6" stroke-linecap="round"/>`;
+  return frame(900, h, t, "ab", body, RISE);
+}
+
+function listBlock(items: string[], x: number, y: number, maxW: number, t: Tokens, delay: number): { svg: string; height: number } {
+  let cy = y;
+  const parts: string[] = [];
+  for (const item of items) {
+    const p = paragraph([{ t: item }], x + 22, cy, maxW - 22, 18, 26, t, 0.9);
+    parts.push(`<rect x="${x + 2}" y="${cy - 10}" width="8" height="8" rx="1.5" fill="${t.accent}"/>${p.svg}`);
+    cy += p.height + 9;
+  }
+  return { svg: rise(delay, parts.join("\n  ")), height: cy - y };
+}
+
+function dnaCard(name: ThemeName): string {
+  const t = TOKENS[name];
+  const left = listBlock(DNA, 48, 96, 380, t, 1);
+  const right = listBlock(EXPLORING, 472, 96, 380, t, 2);
+  const h = 96 + Math.max(left.height, right.height) + 22;
+  const body = rise(0, heading("Developer DNA", 48, 52, t) + heading("Currently Exploring", 472, 52, t)) + left.svg + right.svg +
+    `<line x1="450" y1="36" x2="450" y2="${h - 28}" stroke="${t.text}" stroke-opacity="${t.line}" stroke-dasharray="2 6" stroke-linecap="round"/>`;
+  return frame(900, h, t, "dn", body, RISE);
+}
+
+type Tok = [string, "k" | "s" | "p" | "n"];
+const CODE: Tok[][] = [
+  [["const ", "k"], ["profile ", "n"], ["= {", "p"]],
+  [["  role", "n"], [": ", "p"], ['"Full-Stack Developer"', "s"], [",", "p"]],
+  [["  stack", "n"], [": [", "p"], ['"Next.js"', "s"], [", ", "p"], ['"React"', "s"], [", ", "p"], ['"NestJS"', "s"], [", ", "p"], ['"Tailwind"', "s"], [", ", "p"], ['"TypeScript"', "s"], ["],", "p"]],
+  [["  strengths", "n"], [": [", "p"], ['"Clean UI"', "s"], [", ", "p"], ['"Smooth UX"', "s"], [", ", "p"], ['"Maintainable Code"', "s"], ["],", "p"]],
+  [["  languages", "n"], [": [", "p"], ['"English"', "s"], [", ", "p"], ['"Chinese"', "s"], [", ", "p"], ['"Sinhalese"', "s"], ["],", "p"]],
+  [["  approach", "n"], [": ", "p"], ['"Build with clarity. Design with intention."', "s"], [",", "p"]],
+  [["};", "p"]],
+];
+
+function codeCard(name: ThemeName): string {
+  const t = TOKENS[name];
+  const size = 14.5, lh = 26;
+  const colour = (k: Tok[1]) => (k === "k" ? { fill: t.accent, opacity: 1 } : k === "s" ? { fill: t.text, opacity: 1 } : k === "p" ? { fill: t.text, opacity: 0.5 } : { fill: t.text, opacity: 0.8 });
+  const rows = CODE.map((line, i) => {
+    let cx = 78;
+    return line.map(([txt, kind]) => {
+      const piece = type("mono", txt, cx, 128 + i * lh, size, { ...colour(kind), ls: 0.3 });
+      cx += measure("mono", txt, size, 0.3) + 0.3;
+      return piece;
+    }).join("");
+  }).join("\n  ");
+  const h = 128 + CODE.length * lh + 22;
+  const body = rise(0, heading("Code That Describes Me", 48, 52, t)) +
+    rise(1, `<rect x="48" y="84" width="804" height="${h - 84 - 22}" rx="8" fill="${t.mount}" fill-opacity="${name === "dark" ? 0.55 : 0.12}" stroke="${t.text}" stroke-opacity="${t.line * 0.6}"/>
+  <circle cx="68" cy="100" r="3.5" fill="${t.accent}"/><circle cx="82" cy="100" r="3.5" fill="${t.text}" fill-opacity=".3"/><circle cx="96" cy="100" r="3.5" fill="${t.text}" fill-opacity=".3"/>
+  ${rows}`);
+  return frame(900, h, t, "cd", body, RISE);
+}
+
+const ARCH_ROWS: [string, string][] = [
+  ["Frontend", "Next.js + React + Tailwind"],
+  ["Backend", "NestJS / Node.js + Express"],
+  ["Database", "PostgreSQL + Prisma, or MongoDB"],
+  ["Design", "Figma + component systems"],
+  ["DevOps", "Git + Vercel + Linux"],
+];
+const ARCH_FLOW = ["Next.js UI", "API Routes", "NestJS / Node.js Logic", "Database Layer (SQL / NoSQL)"];
+
+function archCard(name: ThemeName): string {
+  const t = TOKENS[name];
+  const rows = ARCH_ROWS.map(([k, v], i) => {
+    const y = 108 + i * 44;
+    return `${type("mono", k.toUpperCase(), 48, y, 11.5, { fill: t.text, opacity: t.muted, ls: 2.5 })}${type("serif", v, 160, y + 1, 19, { fill: t.text, opacity: 0.92 })}<line x1="48" y1="${y + 14}" x2="420" y2="${y + 14}" stroke="${t.text}" stroke-opacity="${t.line * 0.5}" stroke-dasharray="2 6" stroke-linecap="round"/>`;
+  }).join("\n  ");
+  const boxW = 330, bx = 520, bh = 34, gap = 24;
+  const flow = ARCH_FLOW.map((label, i) => {
+    const y = 84 + i * (bh + gap);
+    const arrowY = y + bh;
+    const arrowSvg = i < ARCH_FLOW.length - 1
+      ? `<path d="M${bx + boxW / 2} ${arrowY + 3}V${arrowY + gap - 5}M${bx + boxW / 2 - 5} ${arrowY + gap - 10}L${bx + boxW / 2} ${arrowY + gap - 4}L${bx + boxW / 2 + 5} ${arrowY + gap - 10}" fill="none" stroke="${t.accent}" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>`
+      : "";
+    return `<rect x="${bx}" y="${y}" width="${boxW}" height="${bh}" rx="5" fill="none" stroke="${t.text}" stroke-opacity="${t.line + 0.15}"/>${type("mono", label, bx + boxW / 2, y + 22, 13.5, { fill: t.text, anchor: "middle", ls: 0.4 })}${arrowSvg}`;
+  }).join("\n  ");
+  const h = 84 + ARCH_FLOW.length * (bh + gap) + 20;
+  const body = rise(0, heading("Architecture I Typically Build", 48, 52, t)) + rise(1, rows) + rise(2, flow);
+  return frame(900, h, t, "ar", body, RISE);
+}
+
+function titleStrip(name: ThemeName, label: string): string {
+  const t = TOKENS[name];
+  return frame(900, 78, t, "ti", `<g class="rise">${heading(label, 48, 50, t)}</g>`, RISE);
+}
+
 const write = (f: string, s: string) => writeFileSync(new URL(f, out), s);
 for (const n of ["dark", "light"] as ThemeName[]) {
   write(`banner-${n}.svg`, banner(n));
@@ -335,6 +503,12 @@ for (const n of ["dark", "light"] as ThemeName[]) {
   write(`langs-${n}.svg`, langsCard(n));
   write(`contrib-${n}.svg`, contribCard(n));
   write(`stack-${n}.svg`, stackCard(n));
+  write(`title-activity-${n}.svg`, titleStrip(n, "Activity"));
+  write(`title-connect-${n}.svg`, titleStrip(n, "Connect"));
+  write(`about-${n}.svg`, aboutCard(n));
+  write(`dna-${n}.svg`, dnaCard(n));
+  write(`code-${n}.svg`, codeCard(n));
+  write(`arch-${n}.svg`, archCard(n));
   write(`divider-${n}.svg`, divider(n));
   write(`link-portfolio-${n}.svg`, pill(n, "Portfolio", 190));
   write(`link-linkedin-${n}.svg`, pill(n, "LinkedIn", 190));

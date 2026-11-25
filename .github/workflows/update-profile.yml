@@ -30,11 +30,15 @@ jobs:
         run: node scripts/fetch-stats.ts
       - name: Build SVGs
         run: node scripts/build.ts
+      - name: Bust GitHub's image cache
+        run: |
+          V=$(date +%Y%m%d%H%M)
+          sed -E -i "s#(assets/[a-z-]+-(dark|light)\.svg)(\?v=[0-9]+)?#\1?v=$V#g" README.md
       - name: Commit changes
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add assets data
+          git add assets data README.md
           if git diff --cached --quiet; then
             echo "No changes"
           else
