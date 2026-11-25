@@ -495,7 +495,7 @@ function archCard(name: ThemeName): string {
 }
 
 /** A button drawn inside the Connect card: cinnabar seal square, label, arrow. */
-/** LinkedIn mark: Tabler Icons (MIT), filled badge. Simple Icons no longer carries LinkedIn. */
+/** LinkedIn mark: Tabler Icons (MIT), outline version. Simple Icons no longer carries LinkedIn. */
 const LINKEDIN = readFileSync(new URL("../icons/linkedin.path", import.meta.url), "utf8").trim();
 
 /** A button inside the Connect card: white logo on a cinnabar tile, label, arrow. */
@@ -503,7 +503,7 @@ function button(t: Tokens, x: number, y: number, w: number, label: string, icon:
   const logo =
     icon === "pa"
       ? `<image href="${ART[0]}" x="${x + 11}" y="${y + 9}" width="30" height="30" filter="url(#tintw)"/>`
-      : `<path transform="translate(${x + 14} ${y + 12}) scale(1)" d="${LINKEDIN}" fill="#ffffff"/>`;
+      : `<path transform="translate(${x + 13} ${y + 12})" d="${LINKEDIN}" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>`;
   return `<g class="rise" style="animation-delay:.3s"><rect x="${x}" y="${y}" width="${w}" height="48" rx="6" fill="${t.paper}" fill-opacity=".6" stroke="${t.text}" stroke-opacity="${t.line + 0.2}"/>
   <rect x="${x + 8}" y="${y + 8}" width="34" height="32" rx="5" fill="${t.accent}"/>${logo}
   ${type("serifBold", label, x + 56, y + 31, 23, { fill: t.text })}

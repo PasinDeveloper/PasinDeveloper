@@ -13,4 +13,4 @@ The logos stay the trademarks of their owners. Three carry their own licence and
 
 Ten more brands publish usage guidelines (Next.js, TypeScript, Tailwind CSS, Node.js, PostgreSQL, MySQL, Appwrite, Figma, Yarn, WordPress); check them before changing how a logo is shown.
 
-`linkedin.path` is the filled LinkedIn badge from [Tabler Icons](https://github.com/tabler/tabler-icons) (MIT, (c) Pawel Kuna), used on the Connect card because Simple Icons no longer includes LinkedIn.
+`linkedin.path` is the outline LinkedIn icon from [Tabler Icons](https://github.com/tabler/tabler-icons) (MIT, (c) Pawel Kuna), used on the Connect card because Simple Icons no longer includes LinkedIn.
